@@ -4,20 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Movement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'user_id', 'type', 'quantity', 'description'];
+    protected $fillable = ['product_id', 'user_id', 'type', 'quantity'];
 
-    public function product(): BelongsTo
+    public function product()
     {
         return $this->belongsTo(Product::class);
     }
 
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

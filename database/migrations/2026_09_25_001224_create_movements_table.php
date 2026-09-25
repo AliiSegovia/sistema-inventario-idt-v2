@@ -10,17 +10,16 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('movements', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('product_id')->constrained()->onDelete('cascade');
-        $table->foreignId('user_id')->constrained();
-        $table->enum('type', ['in', 'out']); // 'in' = entrada, 'out' = salida
-        $table->integer('quantity');
-        $table->text('comments')->nullable();
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('movements', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null'); // <-- Aquí está la línea clave
+            $table->string('type'); // 'entrada' o 'salida'
+            $table->integer('quantity');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

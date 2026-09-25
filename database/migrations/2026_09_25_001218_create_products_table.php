@@ -13,14 +13,16 @@ return new class extends Migration
 {
     Schema::create('products', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('category_id')->constrained()->onDelete('cascade');
-        $table->string('sku')->unique();
         $table->string('name');
+        $table->string('sku')->unique();
+        $table->foreignId('category_id')->constrained()->onDelete('cascade');
+        $table->text('description')->nullable();
         $table->integer('stock')->default(0);
-        $table->decimal('price', 10, 2);
+        $table->decimal('price', 10, 2)->default(0); // <-- ESTA LÍNEA ES LA CLAVE
         $table->timestamps();
     });
 }
+
     /**
      * Reverse the migrations.
      */
